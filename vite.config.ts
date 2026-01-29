@@ -14,20 +14,31 @@ export default defineConfig({
       },
     },
   },
-  /*
+  
    build: {
     outDir: 'dist',
     sourcemap: false, // Production'da sourcemap kapalı (güvenlik)
     minify: 'esbuild',
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom'],
-          mui: ['@mui/material', '@mui/icons-material'],
-        },
+        manualChunks(id) {
+        if (id.includes('node_modules')) {
+          if (id.includes('@mui')) {
+            return 'mui'
+          }
+
+          if (
+            id.includes('react') ||
+            id.includes('react-dom') ||
+            id.includes('react-router-dom')
+          ) {
+            return 'vendor'
+          }
+        }
       },
     },
+  },
     chunkSizeWarningLimit: 1000,
   },
-  */
+  
 })
