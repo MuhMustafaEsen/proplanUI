@@ -11,7 +11,6 @@ import {
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../core/auth/AuthProvider";
-import { useUI } from "../../core/ui/uiContext";
 import { useFormValidation } from "../../core/validatehooks/useFormValidation";
 
 export default function LoginPage(){
@@ -104,6 +103,8 @@ export default function LoginPage(){
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 autoComplete="current-password"
+                error={!!errors.password}
+                helperText={errors.password}
                 />
 
                 <Button
